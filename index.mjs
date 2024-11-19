@@ -2,16 +2,34 @@
 import { z, Caller } from 'agreeable-peer'
 import agreement, { NewRoom } from './agreement.mjs'
 
-const peerKey = process.argv[2]
-const caller = new Caller(peerKey)
-/** @type{{ newRoom: z.infer<NewRoom> }} */
-// @ts-expect-error
-const { newRoom } = caller.proxy(agreement)
-const invite = await newRoom()
-console.log(invite)
+export class RoomManager {
+  /** @type {Caller} */
+  #caller
+  /** @type {{ newRoom: z.infer<NewRoom> }} */
+  #proxy
 
-const cleanup = () => caller.destroy()
+  /**
+   * @param {string} peerKey
+   */
+  constructor(peerKey) {
+    this.#caller = new Caller(peerKey)
+    // @ts-expect-error
+    this.#proxy = this.#caller.proxy(agreement)
+  }
 
-process.on('SIGINT', cleanup)
-process.on('SIGTERM', cleanup)
+  /**
+   * Create a new room
+   * @returns {Promise<string>} Room invite
+   */
+  async createRoom() {
+    return await this.#proxy.newRoom()
+  }
+
+  /**
+   * Clean up resources
+   */
+  cleanup() {
+    this.#caller.destroy()
+  }
+}
 
