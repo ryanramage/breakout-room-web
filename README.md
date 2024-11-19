@@ -11,13 +11,13 @@ A TypeScript/JavaScript library for managing rooms using the agreeable-peer fram
 ## Installation
 
 ```bash
-npm install agreeable-peer
+npm install breakout-room-web 
 ```
 
 ## Usage
 
 ```javascript
-import { RoomManager } from './index.mjs'
+import { RoomManager } from 'breakout-room-web'
 
 // Initialize with a peer key
 const manager = new RoomManager('your-peer-key')
