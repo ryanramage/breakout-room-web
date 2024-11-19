@@ -1,0 +1,16 @@
+{
+  "name": "breakout-room-web",
+  "version": "1.0.0",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "agreeable": "^1.4.1",
+    "agreeable-peer": "^2.0.1",
+    "breakout-room": "^3.4.0"
+  }
+}
